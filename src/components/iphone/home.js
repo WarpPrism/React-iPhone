@@ -3,7 +3,9 @@ import StateBar from 'components/iphone/stateBar.js';
 import MainClock from 'components/iphone/mainClock.js';
 import MsgWidget from 'components/iphone/msgWidget.js';
 import FixedApps from 'components/iphone/fixedApps.js';
+import MoreAppPage from 'components/iphone/moreAppPage.js';
 import Modal from 'components/iphone/modal.js';
+// import { Tooltip } from 'antd';
 require('styles/home.css');
 
 class IphoneHome extends React.Component {
@@ -30,6 +32,10 @@ class IphoneHome extends React.Component {
         this.current_view = 1;
         this.slideDir = '';
     }
+    // componentDidMount() {
+    //     var wallpaper_id = Math.floor(Math.random() * 3);
+    //     $('.iphone-home').css('background-image', `url('../images/lockScreen${wallpaper_id}.jpg')`);
+    // }
     render() {
         return (
             <div className='iphone-home'>
@@ -43,9 +49,12 @@ class IphoneHome extends React.Component {
                         </div>
                     </div>
                     <div className='slide-part-view2'>
-                        <MainClock />
+                        <MoreAppPage />
                     </div>
                 </div>
+                {/*<Tooltip title='页面切换' placement='top' arrowPointAtCenter>*/}
+                    <div className='app-page-switch' onClick={this.slideAppPage.bind(this)}></div>        
+                {/*</Tooltip>*/}
                 <FixedApps />
             </div>    
         );
@@ -100,8 +109,8 @@ class IphoneHome extends React.Component {
         }
         if (this.current_view == 1 && this.slideDir == 'right' && this.$slide) {return};
         if (this.current_view == 2 && this.slideDir == 'left' && this.$slide) {return};
-        // 滑动差值需要大于50 才可以触发滑动操作
-        if (Math.abs(deltaX) < 50) {          
+        // 滑动差值需要大于20 才可以触发滑动操作, 数值越小，滑动操作越灵敏
+        if (Math.abs(deltaX) < 20) {          
             this.refs.slidePart.style.left = this.slideInit + 'px';
             return;
         } else {
@@ -112,6 +121,17 @@ class IphoneHome extends React.Component {
                 this.refs.slidePart.style.left = '0';
                 this.current_view = 1;
             }
+        }
+    }
+    // 移动端切换app页面
+    slideAppPage(e) {
+        // console.log(this.refs.slidePart.style.left);
+        if (this.refs.slidePart.style.left == '0px') {
+            this.refs.slidePart.style.left = '-100%';
+            this.current_view = 2;
+        } else {
+            this.refs.slidePart.style.left = '0px';
+            this.current_view = 1;            
         }
     }
 }
