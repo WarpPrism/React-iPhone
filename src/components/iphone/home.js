@@ -53,7 +53,7 @@ class IphoneHome extends React.Component {
                     </div>
                 </div>
                 {/*<Tooltip title='页面切换' placement='top' arrowPointAtCenter>*/}
-                    <div className='app-page-switch' onClick={this.slideAppPage.bind(this)}></div>        
+                    <div className='app-page-switch' onClick={this.slideAppPage.bind(this)}></div>    
                 {/*</Tooltip>*/}
                 <FixedApps />
             </div>    
@@ -125,8 +125,7 @@ class IphoneHome extends React.Component {
     }
     // 移动端切换app页面
     slideAppPage(e) {
-        // console.log(this.refs.slidePart.style.left);
-        if (this.refs.slidePart.style.left == '0px') {
+        if (this.refs.slidePart.style.left == '0px' || !this.refs.slidePart.style.left) {
             this.refs.slidePart.style.left = '-100%';
             this.current_view = 2;
         } else {

@@ -10,6 +10,8 @@ class Iphone extends React.Component {
         this.initY = 0;
         this.initLeft = 200;
         this.initTop = 0;
+        this.width = 423; // px
+        this.height = 871; // px
         this.state = {
             theme: 'dark',
             iphoneLeft: 100,
@@ -35,10 +37,8 @@ class Iphone extends React.Component {
                 'height': '700px'
             });
         }
-        vm.setState({
-            //居中
-            iphoneLeft: window.screen.availWidth / 2 - (211.5)
-        });
+        vm.setiPhoneCenter()
+        window.onresize = vm.setiPhoneCenter.bind(this)
         
     }
     render() {
@@ -69,6 +69,13 @@ class Iphone extends React.Component {
                 </div>
             </div>
         )
+    }
+    setiPhoneCenter () {
+        this.setState({
+            //居中
+            iphoneLeft: window.innerWidth / 2 - (this.width / 2),
+            iphoneTop: window.innerHeight / 2 - (this.height / 1.7)
+        })
     }
     // 增加iPhone拖动定位效果
     startDrag(e) {

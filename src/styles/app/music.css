@@ -177,6 +177,7 @@
     width: 100%;
     padding: 7px;
 }
+
 .music-app .music-info .music-name
 {
     font-size: 20px;
@@ -188,6 +189,9 @@
     white-space: nowrap;
     height: 35px;
     overflow: scroll;
+}
+.music-name::-webkit-scrollbar {
+    display: none;
 }
 .music-app .music-info .singer
 {
